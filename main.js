@@ -1,11 +1,16 @@
-const SPOTIFY_CLIENT_ID = "67b411e20d594f30bf7a8d3bbde54285";
-const SPOTIFY_CLIENT_SECRET = "161fc5e3df004b95af3ba8c62f3eaf54";
-const PLAYLIST_ID = "7fXKDSXrj7RljWC4QTixrd";
-const container = document.querySelector('main[data-js="tracks"]');
+const SPOTIFY_CLIENT_ID = "f91ab29b8be54da58de9a9f856228ae9";
+const SPOTIFY_CLIENT_SECRET = "5fa03355aaf84741a6b2f8f25b1a8aed";
+const PLAYLIST_ID = "37i9dQZF1DZ06evO05n2Xm";
+
+const container = document.querySelector('div[data-js="tracks"]');
 const activeTrackName = document.querySelector('.active-track__track-name');
 const activeArtistName = document.querySelector('.active-track__track-details--artist-name');
 const activeAlbumName = document.querySelector('.active-track__track-details--album-name');
 const activeTrackImage = document.querySelector('.active-track__image--source');
+const playlistName = document.querySelector('.playlist-details__name');
+const playlistFollower = document.querySelector('.playlist-details__follower');
+let audio = new Audio(); // Create an audio element for track previews
+let currentTrackItem = null; // To store the currently playing track item
 
 function fetchPlaylist(token, playlistId) {
   console.log("token: ", token);
@@ -19,6 +24,10 @@ function fetchPlaylist(token, playlistId) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+
+      if (data.name && data.followers) {
+        updatePlaylistDetails(data.name, data.followers.total);
+      }
 
       if (data.tracks && data.tracks.items) {
         addTracksToPage(data.tracks.items);
@@ -35,6 +44,9 @@ function addTracksToPage(tracks) {
 
     const trackItem = document.createElement('div');
     trackItem.classList.add('track-list__item');
+
+    const playIcon = document.createElement('i');
+    playIcon.classList.add('ri-play-fill', 'track-list__play-icon');
 
     const trackContent = document.createElement('div');
     trackContent.classList.add('track-list__item--content');
@@ -67,17 +79,13 @@ function addTracksToPage(tracks) {
     duration.classList.add('duration-interactions__duration');
     duration.textContent = formatDuration(track.duration_ms);
 
-    const likeButton = document.createElement('div');
-    likeButton.classList.add('duration-interactions__like-button');
-    likeButton.innerHTML = '<i class="ri-heart-line ri-xl"></i>'; // HEART ICON
-
     trackDurationInteractions.appendChild(duration);
-    trackDurationInteractions.appendChild(likeButton);
+    trackDurationInteractions.appendChild(playIcon);
 
     trackItem.appendChild(trackContent);
     trackItem.appendChild(trackDurationInteractions);
 
-    trackItem.addEventListener('click', () => updateActiveTrack(track, trackItem));
+    trackItem.addEventListener('click', () => togglePlayPause(track, trackItem));
 
     container.appendChild(trackItem);
 
@@ -104,6 +112,28 @@ function updateActiveTrack(track, trackItem) {
     item.classList.remove('active');
   });
   trackItem.classList.add('active');
+}
+
+function togglePlayPause(track, trackItem) {
+  if (currentTrackItem === trackItem) {
+    if (audio.paused) {
+      audio.play();
+      trackItem.classList.add('active');
+    } else {
+      audio.pause();
+      trackItem.classList.remove('active');
+    }
+  } else {
+    updateActiveTrack(track, trackItem);
+    audio.src = track.preview_url;
+    audio.play();
+    currentTrackItem = trackItem;
+  }
+}
+
+function updatePlaylistDetails(name, followers) {
+  playlistName.textContent = name;
+  playlistFollower.textContent = `${followers} followers`;
 }
 
 function fetchAccessToken() {
