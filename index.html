@@ -12,21 +12,32 @@
 
     <body>
 
+      <nav class="nav-switch">
+        <a class="nav-switch__link active" href="">Playlist</a>
+        <a class="nav-switch__link"href="">Show</a>
+      </nav>
+
       <!-- COVER ACTIVE TRACK -->
       <aside class="active-track">
         <div class="active-track__image">
           <img class="active-track__image--source" src="./assets/img/profilepicture.jpg" alt=""> <!-- COVER IMAGE -->
         </div>
         <div class="active-track__content">
+          <div class="progress-bar">
+            <div class="progress-bar__indicator"></div>
+          </div>
           <h4 class="active-track__track-name">{track-name}</h4>
           <div class="active-track__track-details">
             <span class="active-track__track-details--artist-name">{artist-name}</span>
             <span class="active-track__track-details--album-name">{album-name}</span>
           </div>
+          <!-- <div class="progress-bar">
+            <div class="progress-bar__indicator"></div>
+          </div> -->
         </div>
       </aside>
 
-      <span class="version-label">Spotify Exercise v1.0.0</span>
+      <span class="version-label">Noel Kampus - Spotify Exercise v1.0.0</span>
 
       <!-- TRACK LIST -->
       <main class="right-side">
@@ -34,9 +45,32 @@
         <div class="playlist-details">
           <h3 class="playlist-details__name">{playlist-name}</h3>
           <span class="playlist-details__follower">{playlist-follower}</span>
+          <button class="playlist-details__play-button"></button>
         </div>
 
-        <div class="track-list" data-js="tracks">
+        <div class=track-list__wrapper>
+          <div class="track-list" data-js="tracks">
+
+            <!-- TRACK LIST COMPONENT-->
+            <!-- <div class="track-list__item">
+              <div class="track-list__item--content">
+                <h6 class="content__track-name">{track-name}</h6>
+                <div class="content__track-details">
+                  <span class="content__track-details--artist-name">{artist-name}</span>
+                  <span class="content__track-details--album-name">{album-name}</span>
+                </div>
+              </div>
+              <div class="track-list__item--duration-interactions">
+                <span class="duration-interactions__duration">{duration}</span>
+                <div class="duration-interactions__like-button">
+                  <i class="ri-heart-line ri-xl"></i>
+                </div>
+              </div>
+            </div> -->
+    
+          </div>
+        </div>
+        <!-- <div class="track-list" data-js="tracks"> -->
 
           <!-- TRACK LIST COMPONENT-->
           <!-- <div class="track-list__item">
@@ -55,7 +89,7 @@
             </div>
           </div> -->
   
-        </div>
+        <!-- </div> -->
 
       </main>
 

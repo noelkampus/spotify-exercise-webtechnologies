@@ -102,6 +102,76 @@ function formatDuration(ms) {
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
+// function updateActiveTrack(track, trackItem) {
+//   activeTrackName.textContent = track.name;
+//   activeArtistName.textContent = track.artists.map(artist => artist.name).join(', ');
+//   activeAlbumName.textContent = track.album.name;
+//   activeTrackImage.src = track.album.images[0]?.url || './assets/img/profilepicture.jpg';
+
+//   document.querySelectorAll('.track-list__item').forEach(item => {
+//     item.classList.remove('active');
+//   });
+//   trackItem.classList.add('active');
+// }
+
+// function togglePlayPause(track, trackItem) {
+//   if (currentTrackItem === trackItem) {
+//     if (audio.paused) {
+//       audio.play();
+//       trackItem.classList.add('active');
+//     } else {
+//       audio.pause();
+//       trackItem.classList.remove('active');
+//     }
+//   } else {
+//     updateActiveTrack(track, trackItem);
+//     audio.src = track.preview_url;
+//     audio.play();
+//     currentTrackItem = trackItem;
+//   }
+// }
+
+const progressBarIndicator = document.querySelector('.progress-bar__indicator');
+let progressInterval;
+
+function updateProgressBar() {
+  const duration = audio.duration;
+  const currentTime = audio.currentTime;
+  const progressPercentage = (currentTime / duration) * 100;
+  progressBarIndicator.style.width = `${progressPercentage}%`;
+}
+
+function startProgressBar() {
+  clearInterval(progressInterval);
+  progressInterval = setInterval(updateProgressBar, 1);
+}
+
+function resetProgressBar() {
+  clearInterval(progressInterval);
+  progressBarIndicator.style.width = '0%';
+}
+
+function togglePlayPause(track, trackItem) {
+  if (currentTrackItem === trackItem) {
+    if (audio.paused) {
+      audio.play();
+      startProgressBar();
+      trackItem.classList.add('active');
+    } else {
+      audio.pause();
+      clearInterval(progressInterval);
+      trackItem.classList.remove('active');
+    }
+  } else {
+    updateActiveTrack(track, trackItem);
+    audio.src = track.preview_url;
+    audio.play();
+    resetProgressBar();
+    startProgressBar();
+    currentTrackItem = trackItem;
+  }
+}
+
 function updateActiveTrack(track, trackItem) {
   activeTrackName.textContent = track.name;
   activeArtistName.textContent = track.artists.map(artist => artist.name).join(', ');
@@ -112,24 +182,13 @@ function updateActiveTrack(track, trackItem) {
     item.classList.remove('active');
   });
   trackItem.classList.add('active');
+  resetProgressBar(); // Reset the progress bar for the new track
 }
 
-function togglePlayPause(track, trackItem) {
-  if (currentTrackItem === trackItem) {
-    if (audio.paused) {
-      audio.play();
-      trackItem.classList.add('active');
-    } else {
-      audio.pause();
-      trackItem.classList.remove('active');
-    }
-  } else {
-    updateActiveTrack(track, trackItem);
-    audio.src = track.preview_url;
-    audio.play();
-    currentTrackItem = trackItem;
-  }
-}
+audio.addEventListener('ended', resetProgressBar); // Reset when the track ends
+audio.addEventListener('pause', () => clearInterval(progressInterval)); // Stop updating progress on pause
+audio.addEventListener('play', startProgressBar); // Start updating progress on play
+
 
 function updatePlaylistDetails(name, followers) {
   playlistName.textContent = name;
