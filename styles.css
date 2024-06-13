@@ -119,13 +119,6 @@ span {
 --gray-200: #c1c1c1;
 --gray-300: #929292;
 --background: #F9F9F9;
-
-/* --black: #ffffff;
---white: #161616;
---gray-100: #262626;
---gray-200: #303030;
---gray-300: #4d4d4d;
---background: #121212; */
 }
 
 /* SPACING */
@@ -168,7 +161,6 @@ body {
   background-color: rgba(240, 240, 240, 0.4);
   
   backdrop-filter: blur(4px);
-  /* box-shadow: 4px 8px 10px rgba(240, 240, 240, 0.8); */
 
   z-index: 99;
 }
@@ -196,11 +188,6 @@ body {
   border-radius: 2rem;
   border: none;
 
-  /* border-style: solid;
-  border-width: 1px;
-  border-color: rgba(255, 255, 255, 1); */
-
-  /* background-color: rgba(240, 240, 240, 0); */
   background-color: rgba(240, 240, 240, 0.6);
 
   font-family: PP Neue Montreal;
@@ -222,9 +209,6 @@ body {
 }
 
 .nav-switch__input-link:focus {
-  /* outline-color: var(--white);
-  outline-width: 1px; */
-
   outline: none;
 }
 
@@ -245,18 +229,12 @@ body {
 
 /* ACTIVE TRACK */
 .active-track {
-  /* position: sticky;
-  top: 4rem; */
-
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
 
   padding: 1.5rem;
   padding-bottom: 2rem;
-
-  /* width: 30vw; */
-  /* height: max-content; */
 
   border-radius: 1.5rem;
 
@@ -411,7 +389,6 @@ body {
 /* PLAYLIST DETAILS */
 .playlist-details {
   position: sticky;
-  /* top: 4rem; */
   top: 0;
 
   display: flex;

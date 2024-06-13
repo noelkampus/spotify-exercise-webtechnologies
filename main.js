@@ -1,5 +1,7 @@
+// Own KEYs (I'm aware it's public but it was a hustle to create and link the .env file)
 const SPOTIFY_CLIENT_ID = "f91ab29b8be54da58de9a9f856228ae9";
 const SPOTIFY_CLIENT_SECRET = "5fa03355aaf84741a6b2f8f25b1a8aed";
+
 // Initial playlist ID
 let PLAYLIST_ID = "37i9dQZF1DZ06evO05n2Xm";
 
@@ -280,28 +282,3 @@ function fetchAccessToken() {
 }
 
 fetchAccessToken();
-
-// playlistInput.addEventListener('change', (event) => {
-//   const newUrl = event.target.value;
-//   const newPlaylistId = extractPlaylistId(newUrl);
-//   if (newPlaylistId) {
-//     PLAYLIST_ID = newPlaylistId;
-//     fetchAccessToken(); // Refetch with the new playlist ID
-//   } else {
-//     alert('Invalid playlist URL');
-//   }
-// });
-
-// function extractPlaylistId(url) {
-//   const match = url.match(/playlist\/([a-zA-Z0-9]+)/);
-//   return match ? match[1] : null;
-// }
-
-// var animation = bodymovin.loadAnimation({
-//   container: document.getElementById('lottie'), // Required
-//   path: 'data.json', // Required
-//   renderer: 'svg/canvas/html', // Required
-//   loop: true, // Optional
-//   // autoplay: true, // Optional
-//   // name: "Hello World", // Name for future reference. Optional.
-// });
