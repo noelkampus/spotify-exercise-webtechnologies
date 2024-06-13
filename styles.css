@@ -81,6 +81,16 @@ p {
   color: var(--black);  
 }
 
+.subtitle {
+  font-family: PP Neue Montreal;
+  font-size: 1rem;
+
+  line-height: 140%;
+  letter-spacing: 0.05rem;
+
+  color: var(--black);  
+}
+
 a {
   font-family: PP Neue Montreal;
   font-size: 1rem;
@@ -218,10 +228,25 @@ body {
   outline: none;
 }
 
-/* ACTIVE TRACK */
-.active-track {
+/* LEFT SIDE */
+.left-side {
   position: sticky;
   top: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+
+  width: 30vw;
+  min-width: 30vw;
+  height: max-content;
+
+}
+
+/* ACTIVE TRACK */
+.active-track {
+  /* position: sticky;
+  top: 4rem; */
 
   display: flex;
   flex-direction: column;
@@ -230,12 +255,24 @@ body {
   padding: 1.5rem;
   padding-bottom: 2rem;
 
-  width: 30vw;
-  height: max-content;
+  /* width: 30vw; */
+  /* height: max-content; */
 
   border-radius: 1.5rem;
 
   background-color: var(--white);
+
+  cursor: pointer;
+}
+
+.active-track:hover {
+  padding: 23px;
+
+  background-color: var(--background);
+
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--gray-100);
 }
 
 .active-track__image {
@@ -286,6 +323,51 @@ body {
 
   background-color: var(--black);
 }
+
+.additional-informations {
+  display: none;
+}
+
+.active-track__release-date {
+  
+}
+
+/* small active track */
+.active-track.small {
+  flex-direction: row;
+  column-gap: 1.5rem;
+
+  padding-bottom: 1.5rem;
+}
+
+.active-track__image.small {
+  width: 8rem;
+  height: 8rem;
+  aspect-ratio: 1 / 1;
+}
+
+.progress-bar.small {
+  display: none;
+}
+
+.additional-informations.small {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+
+  padding: 1.5rem;
+
+  border-radius: 1.5rem;
+
+  background-color: var(--white);
+}
+
+.additional-informations__text-wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
 
 /* VERSION LABEL */
 
@@ -443,13 +525,10 @@ body {
   color: var(--gray-300);
 }
 
+/* active item */
 .track-list__item.active {
   background-color: var(--gray-100);
 }
-
-/* .track-list__item.active .content__track-name {
-  color: var(--white);
-} */
 
 .track-list__item.active .track-list__play-icon {
   display: none;
@@ -463,6 +542,7 @@ body {
   display: block;
 }
 
+/* hover item */
 .track-list__item:hover .track-list__play-icon {
   display: block;
 }

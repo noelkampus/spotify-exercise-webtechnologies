@@ -20,9 +20,36 @@
       </nav>
 
       <!-- COVER ACTIVE TRACK -->
-      <aside class="active-track">
+      <div class="left-side">
+
+        <aside class="active-track"> <!-- small -->
+          <div class="active-track__image"> <!-- small -->
+            <img class="active-track__image--source" src="./assets/img/profilepicture.jpg" alt=""> <!-- COVER IMAGE -->
+          </div>
+          <div class="active-track__content">
+            <div class="progress-bar"> <!-- small -->
+              <div class="progress-bar__indicator"></div>
+            </div>
+            <h4 class="active-track__track-name">{track-name}</h4>
+            <div class="active-track__track-details">
+              <span class="active-track__track-details--artist-name">{artist-name}</span>
+              <span class="active-track__track-details--album-name">{album-name}</span>
+            </div>
+          </div>
+        </aside>
+  
+        <div class="additional-informations">
+          <h6>Song Insights</h6>
+          <div class="additional-informations__text-wrapper">
+            <span class="subtitle text-wrapper__title"><i class="ri-calendar-event-fill"></i>Release Date</span>
+            <span class="active-track__release-date">{release-date}</span>
+          </div>
+        </div>
+      
+      </div>
+      <!-- <aside class="active-track">
         <div class="active-track__image">
-          <img class="active-track__image--source" src="./assets/img/profilepicture.jpg" alt=""> <!-- COVER IMAGE -->
+          <img class="active-track__image--source" src="./assets/img/profilepicture.jpg" alt="">
         </div>
         <div class="active-track__content">
           <div class="progress-bar">
@@ -33,11 +60,10 @@
             <span class="active-track__track-details--artist-name">{artist-name}</span>
             <span class="active-track__track-details--album-name">{album-name}</span>
           </div>
-          <!-- <div class="progress-bar">
-            <div class="progress-bar__indicator"></div>
-          </div> -->
         </div>
       </aside>
+
+      <div class="additional-informations"></div> -->
 
       <span class="version-label">Noel Kampus - Spotify Exercise v1.0.0</span>
 

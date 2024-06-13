@@ -8,6 +8,7 @@ const activeTrackName = document.querySelector('.active-track__track-name');
 const activeArtistName = document.querySelector('.active-track__track-details--artist-name');
 const activeAlbumName = document.querySelector('.active-track__track-details--album-name');
 const activeTrackImage = document.querySelector('.active-track__image--source');
+const activeTrackReleaseDate = document.querySelector('.active-track__release-date');
 const playlistName = document.querySelector('.playlist-details__name');
 const playlistFollower = document.querySelector('.playlist-details__follower');
 const followButton = document.querySelector('.playlist-details__follow-button');
@@ -198,6 +199,13 @@ function updateActiveTrack(track, trackItem) {
   activeAlbumName.textContent = track.album.name;
   activeTrackImage.src = track.album.images[0]?.url || './assets/img/profilepicture.jpg';
 
+  // Parse and format the release date
+  const releaseDate = new Date(track.album.release_date);
+  const day = String(releaseDate.getDate()).padStart(2, '0'); // Ensures 2-digit day
+  const month = String(releaseDate.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+  const year = releaseDate.getFullYear();
+  activeTrackReleaseDate.textContent = `${day}.${month}.${year}`;
+
   document.querySelectorAll('.track-list__item').forEach(item => {
     item.classList.remove('active');
     const playIcon = item.querySelector('.track-list__play-icon');
@@ -218,6 +226,33 @@ function updatePlaylistDetails(name, followers, playlistId) {
   playlistFollower.textContent = `${followers} followers`;
   followButton.href = `https://open.spotify.com/playlist/${playlistId}`;
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const activeTrackElement = document.querySelector(".active-track");
+    if (activeTrackElement) {
+        activeTrackElement.addEventListener("click", shrinkActiveTrack);
+    }
+
+    function shrinkActiveTrack() {
+        const activeTrack = document.querySelector(".active-track");
+        const activeTrackImage = document.querySelector(".active-track__image");
+        const progressBar = document.querySelector(".progress-bar");
+        const additionalInfos = document.querySelector(".additional-informations");
+
+        if (activeTrack.classList.contains('small')) {
+            activeTrack.classList.remove('small');
+            activeTrackImage.classList.remove('small');
+            progressBar.classList.remove('small');
+            additionalInfos.classList.remove('small');
+        } else {
+            activeTrack.classList.add('small');
+            activeTrackImage.classList.add('small');
+            progressBar.classList.add('small');
+            additionalInfos.classList.add('small');
+        }
+    }
+});
+
 
 function fetchAccessToken() {
   fetch("https://accounts.spotify.com/api/token", {
