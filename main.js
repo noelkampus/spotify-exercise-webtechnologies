@@ -9,6 +9,9 @@ const activeArtistName = document.querySelector('.active-track__track-details--a
 const activeAlbumName = document.querySelector('.active-track__track-details--album-name');
 const activeTrackImage = document.querySelector('.active-track__image--source');
 const activeTrackReleaseDate = document.querySelector('.active-track__release-date');
+const activeTrackPopularity = document.querySelector('.active-track__popularity');
+const activeTrackAvailableMarkets = document.querySelector('.active-track__available-markets');
+
 const playlistName = document.querySelector('.playlist-details__name');
 const playlistFollower = document.querySelector('.playlist-details__follower');
 const followButton = document.querySelector('.playlist-details__follow-button');
@@ -198,6 +201,8 @@ function updateActiveTrack(track, trackItem) {
   activeArtistName.textContent = track.artists.map(artist => artist.name).join(', ');
   activeAlbumName.textContent = track.album.name;
   activeTrackImage.src = track.album.images[0]?.url || './assets/img/profilepicture.jpg';
+  activeTrackPopularity.textContent = track.popularity;
+  activeTrackAvailableMarkets.textContent = track.available_markets.length
 
   // Parse and format the release date
   const releaseDate = new Date(track.album.release_date);
