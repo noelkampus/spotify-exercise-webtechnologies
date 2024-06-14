@@ -1,6 +1,5 @@
-// Own KEYs (I'm aware it's public but it was a hustle to create and link the .env file)
-const SPOTIFY_CLIENT_ID = "f91ab29b8be54da58de9a9f856228ae9";
-const SPOTIFY_CLIENT_SECRET = "5fa03355aaf84741a6b2f8f25b1a8aed";
+const SPOTIFY_CLIENT_ID = "67b411e20d594f30bf7a8d3bbde54285";
+const SPOTIFY_CLIENT_SECRET = "161fc5e3df004b95af3ba8c62f3eaf54";
 
 // Initial playlist ID
 let PLAYLIST_ID = "37i9dQZF1DZ06evO05n2Xm";
@@ -19,8 +18,8 @@ const playlistFollower = document.querySelector('.playlist-details__follower');
 const followButton = document.querySelector('.playlist-details__follow-button');
 const playlistInput = document.getElementById('playlist-input');
 
-let audio = new Audio(); // Create an audio element for track previews
-let currentTrackItem = null; // To store the currently playing track item$
+let audio = new Audio(); 
+let currentTrackItem = null;
 
 const inputField = document.querySelector('.nav-switch__input-link');
 
@@ -30,7 +29,7 @@ inputField.addEventListener('paste', (event) => {
     const newPlaylistId = extractPlaylistIdFromUrl(pasteText);
     if (newPlaylistId) {
       PLAYLIST_ID = newPlaylistId;
-      fetchAccessToken(); // Fetch and update the playlist with the new ID
+      fetchAccessToken(); 
     }
   }, 100);
 });
@@ -58,7 +57,7 @@ function fetchPlaylist(token, playlistId) {
       }
 
       if (data.tracks && data.tracks.items) {
-        container.innerHTML = ''; // Clear the existing tracks
+        container.innerHTML = '';
         addTracksToPage(data.tracks.items);
       }
     })
@@ -94,13 +93,13 @@ function addTracksToPage(tracks) {
     const artistName = document.createElement('span');
     artistName.classList.add('content__track-details--artist-name');
 
-    // Create clickable links for each artist
+    // links for each artist
     track.artists.forEach((artist, i) => {
       const artistLink = document.createElement('a');
       artistLink.href = `https://open.spotify.com/artist/${artist.id}`;
-      artistLink.target = "_blank"; // Open in a new tab
+      artistLink.target = "_blank";
       artistLink.textContent = artist.name;
-      if (i > 0) artistName.append(', '); // Add comma separation between artists
+      if (i > 0) artistName.append(', ');
       artistName.appendChild(artistLink);
     });
 
@@ -132,7 +131,7 @@ function addTracksToPage(tracks) {
 
     container.appendChild(trackItem);
 
-    // Set the first track as active initially
+    // set the first track as active initially
     if (index === 0) {
       updateActiveTrack(track, trackItem);
     }
@@ -165,7 +164,7 @@ function resetProgressBar() {
   progressBarIndicator.style.width = '0%';
 }
 
-function togglePlayPause(track, trackItem, playIcon, pauseIcon) {
+function togglePlayPause(track, trackItem, playIcon, pauseIcon) { // presentation -> no idea what the problem is with the play icon --> next steps Gsap transitions and lottie animations
   if (currentTrackItem === trackItem) {
     if (audio.paused) {
       audio.play();
@@ -206,10 +205,10 @@ function updateActiveTrack(track, trackItem) {
   activeTrackPopularity.textContent = track.popularity;
   activeTrackAvailableMarkets.textContent = track.available_markets.length
 
-  // Parse and format the release date
+  // format the release date
   const releaseDate = new Date(track.album.release_date);
-  const day = String(releaseDate.getDate()).padStart(2, '0'); // Ensures 2-digit day
-  const month = String(releaseDate.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+  const day = String(releaseDate.getDate()).padStart(2, '0');
+  const month = String(releaseDate.getMonth() + 1).padStart(2, '0');
   const year = releaseDate.getFullYear();
   activeTrackReleaseDate.textContent = `${day}.${month}.${year}`;
 
@@ -221,12 +220,12 @@ function updateActiveTrack(track, trackItem) {
     pauseIcon.style.display = 'none';
   });
   trackItem.classList.add('active');
-  resetProgressBar(); // Reset the progress bar for the new track
+  resetProgressBar();
 }
 
-audio.addEventListener('ended', resetProgressBar); // Reset when the track ends
-audio.addEventListener('pause', () => clearInterval(progressInterval)); // Stop updating progress on pause
-audio.addEventListener('play', startProgressBar); // Start updating progress on play
+audio.addEventListener('ended', resetProgressBar);
+audio.addEventListener('pause', () => clearInterval(progressInterval));
+audio.addEventListener('play', startProgressBar);
 
 function updatePlaylistDetails(name, followers, playlistId) {
   playlistName.textContent = name;
